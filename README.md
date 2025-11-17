@@ -1,6 +1,7 @@
 # Basic Scala API
 
 Une API REST simple construite avec **Scala 3**, **http4s**, **Cats Effect** et **Circe** pour gérer des films et leurs évaluations par les utilisateurs.
+Faite par Tom PHILIPPE
 
 ## Thème
 
