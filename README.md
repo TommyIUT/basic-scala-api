@@ -9,6 +9,8 @@ Cette API permet de :
 - Gérer un catalogue de **films**
 - Créer des **évaluations** (ratings) de films par les utilisateurs
 
+En résumé cette API simple est la base d'un système de notation de films en communauté.
+
 ## Structure des données
 
 ### Utilisateurs
@@ -70,7 +72,7 @@ Cette API permet de :
 sbt run
 ```
 
-Le serveur démarre sur **http://localhost:8081** avec des données de test pré-chargées via le Seeder.
+Le serveur démarre sur **http://localhost:8081** avec des données de test pré-chargées via le Seeder. Les données pré-chargées contiennent 2 de mes films préférés je les recommande.
 
 ### Lancer les tests unitaires
 ```bash
