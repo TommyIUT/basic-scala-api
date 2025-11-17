@@ -1,13 +1,13 @@
 # Basic Scala API
 
-Une API REST simple construite avec **Scala 3**, **http4s**, **Cats Effect** et **Circe** pour gérer des films et leurs évaluations. 
+Une API REST simple construite avec **Scala 3**, **http4s**, **Cats Effect** et **Circe** pour gérer des films et leurs évaluations par les utilisateurs.
 
 ## Thème
 
 Cette API permet de :
 - Gérer une liste d'**utilisateurs**
-- Consulter un catalogue de **films**
-- Créer et consulter des **évaluations** (ratings) de films par les utilisateurs
+- Gérer un catalogue de **films**
+- Créer des **évaluations** (ratings) de films par les utilisateurs
 
 ## Structure des données
 
@@ -55,6 +55,7 @@ Cette API permet de :
 
 ### Évaluations
 - `GET /ratings` - Récupérer toutes les évaluations
+- `GET /ratings/:userId` - Récupérer les évaluations par utilisateur par ID
 - `POST /ratings` - Créer une nouvelle évaluation
 
 ## Installation et exécution
@@ -75,50 +76,3 @@ Le serveur démarre sur **http://localhost:8081** avec des données de test pré
 ```bash
 sbt test
 ```
-
-### Exemples avec curl
-
-**GET tous les utilisateurs**
-```powershell
-curl http://localhost:8081/users
-```
-
-**POST un nouvel utilisateur**
-```powershell
-curl -X POST http://localhost:8081/users `
-  -H "Content-Type: application/json" `
-  -d '{"pseudo":"alice","description":"Cinéphile"}'
-```
-
-**GET tous les films**
-```powershell
-curl http://localhost:8081/films
-```
-
-**POST un nouveau film**
-```powershell
-curl -X POST http://localhost:8081/films `
-  -H "Content-Type: application/json" `
-  -d '{"title":"Inception","releaseDate":"2010-07-16","director":"Christopher Nolan"}'
-```
-
-**GET une évaluation par ID**
-```powershell
-curl http://localhost:8081/ratings/<RATING_ID>
-```
-
-**POST une évaluation**
-```powershell
-curl -X POST http://localhost:8081/ratings `
-  -H "Content-Type: application/json" `
-  -d '{"userId":"<USER_ID>","filmId":"<FILM_ID>","score":9,"comment":"Excellent"}'
-```
-
-## Architecture
-
-- **InMemoryStore** : Stockage en mémoire (données perdues au redémarrage)
-- **Routes** : Gestion des endpoints HTTP avec http4s DSL
-- **Seeder** : Chargement de données de test au démarrage
-- **Models** : Case classes pour User, Film, Rating
-
-**Port par défaut** : `8081`

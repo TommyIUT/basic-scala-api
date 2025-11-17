@@ -92,6 +92,13 @@ class Routes(store: InMemoryStore) {
         resp    <- Ok(ratings)
       } yield resp
 
+    case GET -> Root / "ratings" / userId =>
+      for {
+        ratings <- store.getRatings()
+        userRatings = ratings.filter(_.userId.toString == userId)
+        resp <- Ok(userRatings)
+      } yield resp
+
     case req @ POST -> Root / "ratings" =>
       for {
         body <- req.as[CreateRating]
