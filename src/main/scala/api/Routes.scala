@@ -38,6 +38,16 @@ class Routes(store: InMemoryStore) {
         resp  <- Ok(users)
       } yield resp
 
+    case GET -> Root / "users" / id =>
+      for {
+        users <- store.getUsers()
+        user  <- users.find(_.id.toString == id) match {
+          case Some(u) => IO.pure(u)
+          case None    => IO.raiseError(new Exception("User not found"))
+        }
+        resp <- Ok(user)
+      } yield resp
+
     case req @ POST -> Root / "users" =>
       for {
         body <- req.as[CreateUser]
@@ -53,6 +63,16 @@ class Routes(store: InMemoryStore) {
       for {
         films <- store.getFilms()
         resp  <- Ok(films)
+      } yield resp
+
+    case GET -> Root / "films" / id =>
+      for {
+        films <- store.getFilms()
+        film  <- films.find(_.id.toString == id) match {
+          case Some(f) => IO.pure(f)
+          case None    => IO.raiseError(new Exception("Film not found"))
+        }
+        resp <- Ok(film)
       } yield resp
 
     case req @ POST -> Root / "films" =>
